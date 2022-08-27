@@ -58,21 +58,21 @@ print('Total number of rows', df.count())
 # In[19]:
 
 
-def top_n_list(df,var, N):
-    '''
-    This function determine the top N numbers of the list
-    '''
-    print("Total number of unique value of"+' '+var+''+':'+' '+str(df.select(var).distinct().count()))
+def top_n(df,var, N):
+    
+    #To determine the top N numbers of the list
+    
+    print("The Total number of unique values of"+' '+var+''+':'+' '+str(df.select(var).distinct().count()))
     print(' ')
     print('Top'+' '+str(N)+' '+'Crime'+' '+var)
     df.groupBy(var).count().withColumnRenamed('count','totalValue')\
     .orderBy(col('totalValue').desc()).show(N)
     
     
-top_n_list(data, 'Category',10)
+top_n(data, 'Category',10)
 print(' ')
 print(' ')
-top_n_list(data,'Description',10)
+top_n(data,'Description',10)
 
 
 data.select('Category').distinct().count()
@@ -83,8 +83,8 @@ data.select('Category').distinct().count()
 
 training, test = data.randomSplit([0.7,0.3], seed=60)
 
-print("Training Dataset Count:", training.count())
-print("Test Dataset Count:", test.count())
+print("The Training Dataset Count is:", training.count())
+print("The Test Dataset Count is:", test.count())
 
 
 
