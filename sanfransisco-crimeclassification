@@ -163,42 +163,6 @@ nb = NaiveBayes(smoothing=1)
 
 
 
-
-
-def metrics_ev(labels, metrics):
-    '''
-    List of all performance metrics
-    '''
-    # Confusion matrix
-    print("Confusion matrix")
-    print(metrics.confusionMatrix)
-    print(' ')    
-    # Overall statistics
-    print('Overall statistics')
-    print("Precision = %s" %  metrics.precision())
-    print("Recall = %s" %  metrics.recall())
-    print("F1 Score = %s" % metrics.fMeasure())
-    print(' ')
-    # Statistics by class
-    print('Statistics by class')
-    for label in sorted(labels):
-       print("Class %s precision = %s" % (label, metrics.precision(label)))
-       print("Class %s recall = %s" % (label, metrics.recall(label)))
-       print("Class %s F1 Measure = %s" % (label, metrics.fMeasure(label, beta=1.0)))
-    print(' ')
-    # Weighted stats
-    print('Weighted stats')
-    print("Weighted recall = %s" % metrics.weightedRecall)
-    print("Weighted precision = %s" % metrics.weightedPrecision)
-    print("Weighted F(1) Score = %s" % metrics.weightedFMeasure())
-    print("Weighted F(0.5) Score = %s" % metrics.weightedFMeasure(beta=0.5))
-    print("Weighted false positive rate = %s" % metrics.weightedFalsePositiveRate)
-    
-
-
-
-
-
 pipeline_cv_lr = Pipeline().setStages([regex_tokenizer,stopwords_remover,count_vectors,label_string_idx, lr])
 model_cv_lr = pipeline_cv_lr.fit(training)
 predictions_cv_lr = model_cv_lr.transform(test)
