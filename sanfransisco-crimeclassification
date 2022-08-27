@@ -14,7 +14,7 @@ get_ipython().system(' pip install seaborn')
 
 
 import pyspark
-spark = pyspark.sql.SparkSession.builder.appName("clipper-pyspark").getOrCreate()
+spark = pyspark.sql.SparkSession.builder.appName("sanfransisco32-22-MLspark").getOrCreate()
 
 sc = spark.sparkContext
 
