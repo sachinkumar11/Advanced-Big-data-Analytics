@@ -214,7 +214,7 @@ predictions_idf_lr = model_idf_lr.transform(test)
 
 
 
-print('Check Top 5 predictions')
+print('Checks Top 5 predictions')
 print(' ')
 predictions_idf_lr.select('Description','Category',"probability","label","prediction")\
                                         .orderBy("probability", ascending=False)\
