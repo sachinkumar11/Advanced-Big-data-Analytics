@@ -100,9 +100,9 @@ print('Total number of rows', df.count())
 # COMMAND ----------
 
 def top_n_list(df,var, N):
-    '''
-    This function determine the top N numbers of the list
-    '''
+    
+    #To determine the top N numbers of the list
+    
     print("Total number of unique value of"+' '+var+''+':'+' '+str(df.select(var).distinct().count()))
     print(' ')
     print('Top'+' '+str(N)+' '+'Crime'+' '+var)
