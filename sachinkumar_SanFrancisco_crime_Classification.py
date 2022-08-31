@@ -1,3 +1,5 @@
+# Last commit on 31st august 2022 - (Added comments)
+# ssachinkumar_Databricks
 # Databricks notebook source
 # MAGIC %md
 # MAGIC 
@@ -206,11 +208,11 @@ predictions_cv_lr = model_cv_lr.transform(test)
 
 # COMMAND ----------
 
-print('Top 5 predictions')
+print('Top 8 predictions')
 print(' ')
 predictions_cv_lr.select('Description','Category',"probability","label","prediction")\
                                         .orderBy("probability", ascending=False)\
-                                        .show(n=5, truncate=30)
+                                        .show(n=8, truncate=30)
 
 # COMMAND ----------
 
@@ -237,18 +239,18 @@ pipeline_idf_rf = Pipeline().setStages([regex_tokenizer,stopwords_remover,hashin
 
 model_idf_rf = pipeline_idf_rf.fit(training)
 predictions_idf_rf = model_idf_rf.transform(test)
-# predictions.filter(predictions['prediction'] == 0) \
-#     .select("Descript","Category","probability","label","prediction") \
-#     .orderBy("probability", ascending=False) \
-#     .show(n = 10, truncate = 30
 
-# COMMAND ----------
+print('check Top 8 predictions')
+print(' ')
+predictions_idf_rf.select('Description','Category',"probability","label","prediction")\
+                                        .orderBy("probability", ascending=False)\
+                                        .show(n=8, truncate=30)
 
 evaluator_idf_rf = MulticlassClassificationEvaluator().setPredictionCol("prediction").evaluate(predictions_idf_rf)
 print(' ')
 print('Accuracy')
 print(' ')
-print('                          accuracy:{}:'.format(evaluator_idf_rf))
+print('accuracy:{}:'.format(evaluator_idf_rf))
 
 # COMMAND ----------
 
@@ -262,15 +264,15 @@ pipeline_idf_lr = Pipeline().setStages([regex_tokenizer,stopwords_remover,hashin
 model_idf_lr = pipeline_idf_lr.fit(training)
 predictions_idf_lr = model_idf_lr.transform(test)
 
-# COMMAND ----------
+#COMMAND ----------
 
-# print('check Top 5 predictions')
-# print(' ')
-# predictions_idf_lr.select('Description','Category',"probability","label","prediction")\
-#                                         .orderBy("probability", ascending=False)\
-#                                         .show(n=5, truncate=30)
+print('check Top 8 predictions')
+print(' ')
+predictions_idf_lr.select('Description','Category',"probability","label","prediction")\
+                                        .orderBy("probability", ascending=False)\
+                                        .show(n=8, truncate=30)
 
-# COMMAND ----------
+#COMMAND ----------
 
 evaluator_idf_lr = MulticlassClassificationEvaluator().setPredictionCol("prediction").evaluate(predictions_idf_lr)
 print(' ')
@@ -285,6 +287,12 @@ pipeline_idf_nb = Pipeline().setStages([regex_tokenizer,stopwords_remover,hashin
 model_idf_nb = pipeline_idf_nb.fit(training)
 predictions_idf_nb = model_idf_nb.transform(test)
 
+print('check Top 8 predictions')
+print(' ')
+predictions_idf_nb.select('Description','Category',"probability","label","prediction")\
+                                        .orderBy("probability", ascending=False)\
+                                        .show(n=8, truncate=30)
+
 evaluator_idf_nb = MulticlassClassificationEvaluator().setPredictionCol("prediction").evaluate(predictions_idf_nb)
 print(' ')
 print('Accuracy')
@@ -293,11 +301,17 @@ print('accuracy:{}:'.format(evaluator_idf_nb))
 
 # COMMAND ----------
 
-# Random Forest 
+# Random Forest using Count vectors
 
 pipeline_cv_rf = Pipeline().setStages([regex_tokenizer,stopwords_remover,count_vectors,label_string_idx, rf])
 model_cv_rf = pipeline_cv_rf.fit(training)
 predictions_cv_rf = model_cv_rf.transform(test)
+
+print('check Top 8 predictions')
+print(' ')
+predictions_cv_rf.select('Description','Category',"probability","label","prediction")\
+                                        .orderBy("probability", ascending=False)\
+                                        .show(n=8, truncate=30)
 
 evaluator_cv_rf = MulticlassClassificationEvaluator().setPredictionCol("prediction").evaluate(predictions_cv_rf)
 print(' ')
@@ -307,9 +321,16 @@ print('accuracy:{}:'.format(evaluator_cv_rf))
 
 # COMMAND ----------
 
+# Naive Bayes using Count vectors
 pipeline_cv_nb = Pipeline().setStages([regex_tokenizer,stopwords_remover,count_vectors,label_string_idx, nb])
 model_cv_nb = pipeline_cv_nb.fit(training)
 predictions_cv_nb = model_cv_nb.transform(test)
+
+print('check Top 8 predictions')
+print(' ')
+predictions_cv_nb.select('Description','Category',"probability","label","prediction")\
+                                        .orderBy("probability", ascending=False)\
+                                        .show(n=8, truncate=30)
 
 evaluator_cv_nb = MulticlassClassificationEvaluator().setPredictionCol("prediction").evaluate(predictions_cv_nb)
 print(' ')
